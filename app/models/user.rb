@@ -1,5 +1,12 @@
 class User < ApplicationRecord
 
+  has_many :friend_requests, dependent: :destroy
+  has_many :pending_friends, through: :friend_requests,
+                             source: :friend
+
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   # Include default devise modules. Others available are:
@@ -11,5 +18,9 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 256 }
   validates :email, length: { maximum: 256 },
                     format: { with: VALID_EMAIL_REGEX }
+
+  def remove_friend(friend)
+    current_user.friends.destroy(friend)
+  end
 
 end

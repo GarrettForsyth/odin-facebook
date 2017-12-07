@@ -2,5 +2,7 @@
 <h1> <%= yield :title %></h1>
     
 <% unless current_user?(@user) %>
-  <%= link_to "Send Friend Request", new_friend_request_path %>
+  <%= link_to "Send Friend Request",
+    friend_requests_path(friend_id: @user.id),
+    method: :post %>
 <% end %>
