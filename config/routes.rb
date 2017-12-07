@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  devise_for :users
+  resources :users, only: [:show]
+  get 'users/:id', to: 'users#show', as: 'user_profile'
+  root to: 'static_pages#home'
+
 end
