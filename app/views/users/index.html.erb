@@ -1,0 +1,13 @@
+<% title 'User List' %>
+
+<div id="users">
+<% for user in @users %>
+  <div class="user">
+    <p>
+      <strong><%= user.name %></strong>
+      <%= link_to "Add Friend", friend_requests_path(friend_id: user) %>
+      <div class="clear"></div>
+    </p>
+  </div>
+<% end %>
+</div>

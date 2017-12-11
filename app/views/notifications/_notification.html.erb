@@ -1,0 +1,27 @@
+<% case notification.notice_type %>
+<% when "friend request" %>
+  <li>
+    <%= link_to "#{notification.notified_by.name}",  
+        user_profile_path(notification.notified_by) %>
+    wants to be
+    <%= link_to "friends!",
+                 friend_requests_path(friend_id: current_user) %>
+  </li>
+
+<% when "declined friend request" %>
+
+  <li>
+    <%= link_to "#{notification.notified_by.name}",   
+        user_profile_path(notification.notified_by) %>
+      has declined your friend request.
+  </li>
+
+<% when "accepted friend request" %>
+
+  <li>
+    <%= link_to "#{notification.notified_by.name}",   
+        user_profile_path(notification.notified_by) %>
+      has accepted your friend request.
+  </li>
+
+<% end %>

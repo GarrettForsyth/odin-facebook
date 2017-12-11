@@ -9,5 +9,18 @@ FactoryBot.define do
     # This sequence avoids the email's uniqueness validation from failing
     sequence(:email) { |n| "foo#{n}@example.com" }
     password "secret"
+
+    after(:create) { |user| user.confirm }
   end
+
+  factory :friend_request do
+    user
+    association :friend, factory: :user
+  end
+
+  factory :friendship do
+    user
+    association :friend, factory: :user
+  end
+
 end

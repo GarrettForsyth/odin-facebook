@@ -1,8 +1,42 @@
-<% provide :title, "#{@user.name}'s Profile" %>
-<h1> <%= yield :title %></h1>
-    
-<% unless current_user?(@user) %>
-  <%= link_to "Send Friend Request",
-    friend_requests_path(friend_id: @user.id),
-    method: :post %>
+<% title "#{@user.name}'s Profile" %>
+
+<% if user_signed_in? %>
+  <p> Currently signed in as <%=current_user.name %></p>
 <% end %>
+
+<div class="nav">
+  <% unless current_user?(@user) %>
+    <%= link_to "Send Friend Request",
+      friend_requests_path(friend_id: @user.id),
+      method: :post %>
+  <% else %>
+    <%= link_to "View Friend Requests", friend_requests_path(friend_id: @user) %>
+    <br />
+    <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+    <br />
+    <%=  link_to "Find Friends", users_path %>
+  <% end %>
+</div>
+
+<% if current_user %>
+  
+  <div class="notifications">
+    <h4>Notifications</h4>
+    <ul>
+     <%= render current_user.notifications.order('created_at DESC') %>
+   </ul>
+  </div>
+<% end %>
+
+    
+<div class="friends">
+  
+  <h2>Friends</h2>
+  <ul>
+    <% for user in @user.friends %>
+      <%= user.name %>
+      (<%= link_to "remove", friends_destroy_path(id: user.id), method: :delete %>)
+    <% end %>
+  </ul>
+</div>
+

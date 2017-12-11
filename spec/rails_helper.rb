@@ -9,6 +9,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
 require 'support/mailer_macros'
+require 'support/capybara_helpers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -62,5 +63,18 @@ RSpec.configure do |config|
   config.include Capybara::DSL 
 
   config.include(MailerMacros)
-  config.before(:each) { reset_emails}
+  config.include(UserMacros)
+  config.before(:each) { reset_emails }
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+
+    begin 
+      DatabaseCleaner.start
+      FactoryBot.lint
+    ensure
+      DatabaseCleaner.clean
+    end
+  end
 end

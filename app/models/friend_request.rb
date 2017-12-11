@@ -8,6 +8,13 @@ class FriendRequest < ApplicationRecord
   validates :user, presence: true
   validates :friend, presence: true, uniqueness: { scope: :user }
 
+  # adds each user to the other's friends (inverse relationship)
+  # and destroys the pending request
+  def accept
+    user.friends << friend
+    destroy
+  end
+
 private
 
   def not_self
@@ -15,12 +22,12 @@ private
   end
 
   def not_friends
-    erros.add(:friend, "is already friend") if user.friends.include?(friend)
+    errors.add(:friend, "is already friend") if user.friends.include?(friend)
   end
 
   def not_pending
     errors.add(:friend, "already requested friendship") if
-    friend.pending_friends.include?(friend)
+    user.pending_friends.include?(friend)
   end
 
 end

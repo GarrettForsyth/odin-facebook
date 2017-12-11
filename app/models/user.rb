@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  has_many :notifications, dependent: :destroy
+
+  has_many :posts, dependent: :destroy
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   # Include default devise modules. Others available are:
@@ -20,7 +24,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
 
   def remove_friend(friend)
-    current_user.friends.destroy(friend)
+    self.friends.destroy(friend)
   end
 
 end

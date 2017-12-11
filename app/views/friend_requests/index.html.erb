@@ -1,0 +1,11 @@
+<h1> Friend Request For <%= current_user.name %></h1>
+
+<h3>Outgoing Request:</h3>
+<ul>
+  <%= render @outgoing %>
+</ul>
+<br />
+<h3>Incoming Request</h3>
+<ul>
+  <%= render @incoming %>
+</ul>

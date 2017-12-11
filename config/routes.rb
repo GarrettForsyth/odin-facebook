@@ -2,16 +2,18 @@ Rails.application.routes.draw do
 
   get 'friends/index'
 
-  get 'friends/destroy'
+  delete 'friends/destroy'
 
   root to: 'static_pages#home'
 
 
   devise_for :users
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index]
   get 'users/:id', to: 'users#show', as: 'user_profile'
 
   resources :friend_requests
+
+  resources :notifications, only: [:destroy]
 
 end

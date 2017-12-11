@@ -4,13 +4,7 @@ describe "UserSignUps", type: :request do
 
   it "emails the user when creating a new account" do
     user = build(:user)
-    visit root_path
-    click_link "Sign Up"
-    fill_in "Name", with: user.name 
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    fill_in "Password confirmation", with: user.password
-    click_button "Sign up"
+    register(user)
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content("sent to your email address.")
@@ -27,7 +21,6 @@ describe "UserSignUps", type: :request do
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
     click_button "Sign up"
-
 
     expect(current_path).to eq(user_registration_path)
     expect(page).to have_content("Email has already been taken")

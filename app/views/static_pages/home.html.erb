@@ -1,5 +1,4 @@
-<% provide :title, 'Welcome to Chess Friends!' %>
-<h1> <%= yield :title %> </h1>
+<% title "Welcome to Chess Friends!" %>
 
 <% if user_signed_in? %>
   <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>

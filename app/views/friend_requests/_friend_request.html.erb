@@ -1,0 +1,10 @@
+<li>  <%= friend_request.id  %> <%= friend_request.user.name %> requests
+  <%= friend_request.friend.name %>
+as a friend.
+<% if friend_request.friend == current_user %>
+  <%= link_to "Accept", friend_request_path(friend_request),
+    method: :patch  %>
+  <%= link_to "Decline", friend_request_path(friend_request), 
+    method: :delete %>
+   </li>
+<% end %>

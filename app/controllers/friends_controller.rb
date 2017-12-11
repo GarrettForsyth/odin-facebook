@@ -7,13 +7,14 @@ class FriendsController < ApplicationController
   end
 
   def destroy
-    current.user.remove_friend(@friend)
+    current_user.remove_friend(@friend)
+    flash[:notice] = "Friend removed."
     head :no_content
   end
 
 private
 
   def set_friend
-    @friend = current_user.friends(find(params[:id]))
+    @friend = current_user.friends.find(params[:id])
   end
 end
