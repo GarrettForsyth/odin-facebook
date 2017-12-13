@@ -36,6 +36,14 @@ module UserMacros
     click_link "Accept"
     log_out(friend)
   end
+  
+  def create_post_from user
+    log_in user
+    click_link "Create New Post"
+    fill_in "Content", with:  "My first post!"
+    click_button "Post!"
+    log_out user
+  end
 
 
 end

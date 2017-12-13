@@ -1,0 +1,44 @@
+<div class="user-post" id=<%="user-post-#{post.id}"%>->
+  
+  <p>
+    <strong>
+      <%= link_to User.find(post.author_id).name,
+                  user_profile_path(post.author_id) %>
+    </strong>
+
+  <%= post.created_at %>
+  </p>
+  <p> <%= post.content %></p>
+  <p> <%= post.get_likes.size %> likes.
+
+  <%= post.get_dislikes.size %> dislikes.</p>
+<% unless post.author_id == current_user.id %>
+  
+  <% case current_user.voted_as_when_voted_for post %>
+    <% when true %>
+    <%= button_to "unlike", { controller: "posts", action: :unlike },
+      params: { vote: { post_id: post.id,
+                        user_id: current_user.id } } %>
+    <% when false %>              
+    <%= button_to "undislike", { controller: "posts", action: :undislike },
+      params: { vote: { post_id: post.id,
+                        user_id: current_user.id } } %>
+    <% else %>
+      <%= button_to "like", { controller: "posts", action: :like },
+        params: { vote: { post_id: post.id,
+                          user_id: current_user.id } } %>
+
+      <%= button_to "dislike", { controller: "posts", action: :dislike },
+        params: { vote: { post_id: post.id,
+                          user_id: current_user.id } } %>
+  <% end %>
+
+<% end %>
+<%= button_to "Comment", new_comment_path,
+  method: :get,
+  params: { post_id: post.id }%>
+
+  <div id="post-comments-<%= post.id %>" class="post-comments">
+    <%= render post.comments %>
+  </div>
+</div>

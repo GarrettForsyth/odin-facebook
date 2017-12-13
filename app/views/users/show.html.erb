@@ -15,6 +15,10 @@
     <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
     <br />
     <%=  link_to "Find Friends", users_path %>
+    <br />
+    <%= link_to "My Timeline", posts_path %>
+    <br />
+    <%= link_to "Create New Post", new_post_path %>
   <% end %>
 </div>
 

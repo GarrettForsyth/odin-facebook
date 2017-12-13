@@ -23,4 +23,20 @@ FactoryBot.define do
     association :friend, factory: :user
   end
 
+  factory :notification do
+    user
+    association :notified_by, factory: :user
+  end
+
+  factory :post do
+    content "test content"
+    association :author, factory: :user
+  end
+
+  factory :comment do
+    content "comment content"
+    association :author, factory: :user
+    post
+  end
+
 end
