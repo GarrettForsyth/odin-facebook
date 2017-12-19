@@ -16,7 +16,7 @@ describe "UserCommentsOnAPosts", type: :request do
 
       expect(Post.last.comments.size).to eq(0)
       
-      within(".user-post") do
+      within(".user_post") do
         click_button "Comment"
       end
 

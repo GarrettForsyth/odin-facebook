@@ -1,8 +1,7 @@
 module UserMacros
 
   def register(user)
-    visit root_path
-    click_link "Sign Up"
+    visit new_user_registration_path
     fill_in "Name", with: user.name 
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
@@ -19,7 +18,7 @@ module UserMacros
 
   def log_out(user)
     visit user_path(user)
-    click_link "Log Out"
+    page.find(:xpath, "//a[@href='/users/sign_out']").click
   end
 
   def send_friend_request(sending_friend, receiving_friend)
@@ -46,4 +45,11 @@ module UserMacros
   end
 
 
+  def create_post_from_with(user, text)
+    log_in user
+    click_link "Create New Post"
+    fill_in "Content", with: text
+    click_button "Post!"
+    log_out user
+  end
 end

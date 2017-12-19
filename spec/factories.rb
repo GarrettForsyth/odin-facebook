@@ -39,4 +39,11 @@ FactoryBot.define do
     post
   end
 
+  factory :profile do
+    user
+    address "123 Factroy St."
+    phone   "(555)-555-5555"
+    about_me "I am a factory profile."
+  end
+
 end

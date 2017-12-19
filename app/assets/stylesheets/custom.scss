@@ -1,0 +1,193 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+body {
+    padding-top: 60px;
+  }
+
+section {
+    overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #4286f4;
+  text-decoration: none;
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+
+/* flash */
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+ /* bootstrap drop down */
+
+.dropdown-menu {
+  width: 200%;
+}
+
+.dropdown-menu >li {
+  float: left;
+}
+
+/* post styling */
+
+.user_post {
+  border: 1px solid black;
+
+}
+
+.user_comment {
+  border: 1px solid #b3bfd1 
+}
+
+.post_content {
+  margin-left:  100px;
+}
+
+.comment_content {
+  margin-left:  100px;
+}
+
+.post_comments {
+  margin-left:  50px;
+  border: 1px solid #b3bfd1 
+
+}
+
+.post_buttons > .button_to {
+  display: inline;
+}
+
+
+.comment_buttons > .button_to {
+  display: inline;
+}
+
+ul, li {
+  list-style-type :none;
+}
+
+/* notification dropdown */
+
+.notification_dropdown a {
+  margin-left: 5px;
+  color: black;
+}
+
+.notification_dropdown_x a {
+  right: 10px;
+  color: red;
+}
+
+
+.notification_dropdown a:hover{
+  text-decoration: none;
+}
+
+

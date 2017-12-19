@@ -1,11 +1,23 @@
-<h1> Friend Request For <%= current_user.name %></h1>
+<% title "My Friend Requests" %>
 
-<h3>Outgoing Request:</h3>
+<h1> Friend Requests For <%= current_user.name %></h1>
+
+<h3>Outgoing Requests:</h3>
 <ul>
-  <%= render @outgoing %>
+  <% @outgoing.each do |fr| %>
+    <li>
+    <%= gravatar_for User.find(fr.friend_id) ,size: 30 %>
+    <%= render fr %>
+    </li>
+  <% end %>
 </ul>
 <br />
-<h3>Incoming Request</h3>
+<h3>Incoming Requests</h3>
 <ul>
-  <%= render @incoming %>
+  <% @incoming.each do |fr| %>
+    <li>
+      <%= gravatar_for User.find(fr.user_id), size: 30 %>
+      <%= render fr %>
+   </li>
+  <% end %>
 </ul>

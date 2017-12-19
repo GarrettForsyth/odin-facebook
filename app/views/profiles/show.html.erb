@@ -1,0 +1,42 @@
+<% title "Profile of #{current_user.name}" %>
+
+<div class="name">
+  <%= gravatar_for @profile.user, size: 180 %>
+  <h3> <%= current_user.name %></h3>
+  <%= link_to "Edit My Profile", edit_profile_path %>
+</div>
+
+<div class="contact_information">
+  <h2>Contact</h2>
+
+  <% if @profile.address.present? %>
+    <div id="address"> Address: <%= @profile.address %></div>
+  <% end %>
+
+  <% if @profile.phone.present? %>
+    <div id="phone_number"> Phone: <%= @profile.phone %></div>
+  <% end %>
+
+  
+</div>
+
+<div class="about_me">
+  <h2>About <%= @profile.user.name %></h2>
+  <p>
+    <%= @profile.about_me %>
+  </p>
+</div>
+
+<div class="my_friends">
+  <h2>My Friends</h2>
+  <% @profile.user.friends.each do |f| %>
+    <%= gravatar_for f, size: 40 %>
+    <%= link_to f.name, f %>
+    (<%= link_to "remove", friends_destroy_path(id: f.id), method: :delete %>)
+  <% end %>
+</div>
+
+<div class="my_posts">
+  <h2>My Posts</h2>
+    <%= render @profile.user.posts %>
+</div>

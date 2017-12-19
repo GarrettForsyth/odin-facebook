@@ -1,44 +1,62 @@
-<div class="user-post" id=<%="user-post-#{post.id}"%>->
+<div class="user_post_with_comments" id=<%="user_post_#{post.id}"%> >
+
+  <div class="user_post" id=<%="user_post_with_comments_#{post.id}"%> >
   
-  <p>
-    <strong>
-      <%= link_to User.find(post.author_id).name,
-                  user_profile_path(post.author_id) %>
-    </strong>
+    <div class="user_post_header">
+      <%=gravatar_for User.find(post.author_id), size: 60 %>
+      <strong>
+        <%= link_to User.find(post.author_id).name,
+                    user_profile_path(post.author_id) %>
+      </strong>
 
-  <%= post.created_at %>
-  </p>
-  <p> <%= post.content %></p>
-  <p> <%= post.get_likes.size %> likes.
+      <%= post.created_at.in_time_zone('EST').strftime("%b %d %I:%M") %>
 
-  <%= post.get_dislikes.size %> dislikes.</p>
-<% unless post.author_id == current_user.id %>
-  
-  <% case current_user.voted_as_when_voted_for post %>
-    <% when true %>
-    <%= button_to "unlike", { controller: "posts", action: :unlike },
-      params: { vote: { post_id: post.id,
-                        user_id: current_user.id } } %>
-    <% when false %>              
-    <%= button_to "undislike", { controller: "posts", action: :undislike },
-      params: { vote: { post_id: post.id,
-                        user_id: current_user.id } } %>
-    <% else %>
-      <%= button_to "like", { controller: "posts", action: :like },
-        params: { vote: { post_id: post.id,
-                          user_id: current_user.id } } %>
+        
+      <%= post.get_likes.size %> ↑
+      <%= post.get_dislikes.size %> ↓  
 
-      <%= button_to "dislike", { controller: "posts", action: :dislike },
-        params: { vote: { post_id: post.id,
-                          user_id: current_user.id } } %>
-  <% end %>
+    </div>
 
-<% end %>
-<%= button_to "Comment", new_comment_path,
-  method: :get,
-  params: { post_id: post.id }%>
+    <div class="post_content">
+      <p><%= post.content %></p>
+    </div>
 
-  <div id="post-comments-<%= post.id %>" class="post-comments">
+    <div class="post_buttons">
+      <% unless post.author_id == current_user.id %>
+        
+        <% case current_user.voted_as_when_voted_for post %>
+          <% when true %>
+            <%= button_to "unlike", { controller: "posts", action: :unlike },
+              class: "btn btn-warning",
+            params: { vote: { post_id: post.id,
+                              user_id: current_user.id } } %>
+          <% when false %>              
+          <%= button_to "undislike", { controller: "posts", action: :undislike },
+              class: "btn btn-warning",
+            params: { vote: { post_id: post.id,
+                              user_id: current_user.id } } %>
+          <% else %>
+            <%= button_to "like", { controller: "posts", action: :like },
+              class: "btn btn-success",
+              params: { vote: { post_id: post.id,
+                                user_id: current_user.id } } %>
+
+            <%= button_to "dislike", { controller: "posts", action: :dislike },
+              class: "btn btn-danger",
+              params: { vote: { post_id: post.id,
+                                user_id: current_user.id } } %>
+        <% end %>
+      <% end %>
+
+      <%= button_to "Comment", new_comment_path,
+              class: "btn btn-info",
+           method: :get,
+           params: { post_id: post.id }%>
+    </div>
+  </div>
+
+  <div id="post-comments-<%= post.id %>" class="post_comments">
     <%= render post.comments %>
   </div>
+
 </div>

@@ -19,7 +19,7 @@ describe "UserLikesAPosts", type: :request do
       log_in @user2
       click_link "My Timeline"
 
-      within(".user-post") do
+      within(".user_post") do
         click_button "like"
       end
 
@@ -32,7 +32,7 @@ describe "UserLikesAPosts", type: :request do
       p = Post.all.last
       log_in @user
       click_link "My Timeline"
-      within(".user-post") do
+      within(".user_post") do
         click_button "like"
       end
 
@@ -46,13 +46,13 @@ describe "UserLikesAPosts", type: :request do
       log_in @user2
       click_link "My Timeline"
 
-      within(".user-post") do
+      within(".user_post") do
         click_button "like"
       end
 
       expect(p.get_likes.size).to eq(1)
 
-      within(".user-post") do
+      within(".user_post") do
         click_button "unlike"
       end
 
@@ -66,7 +66,7 @@ describe "UserLikesAPosts", type: :request do
       log_in @user2
       click_link "My Timeline"
 
-      within(".user-post") do
+      within(".user_post") do
         click_button "dislike"
       end
 
@@ -78,13 +78,13 @@ describe "UserLikesAPosts", type: :request do
         log_in @user2
         click_link "My Timeline"
 
-        within(".user-post") do
+        within(".user_post") do
           click_button "dislike"
         end
 
         expect(p.get_dislikes.size).to eq(1)
 
-        within(".user-post") do
+        within(".user_post") do
           click_button "undislike"
         end
 

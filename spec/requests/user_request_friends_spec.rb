@@ -14,7 +14,7 @@ RSpec.describe "UserRequestFriends", type: :request do
       expect(user.pending_friends.last).to eq(new_friend) 
 
       log_in new_friend
-      within ('.notifications') do
+      within ('.nav') do
         expect(page).to have_content "#{user.name} wants to be friends!"
       end
 
@@ -32,7 +32,7 @@ RSpec.describe "UserRequestFriends", type: :request do
       log_out new_friend
       log_in user
 
-      within ('.notifications') do
+      within ('.nav') do
         expect(page).to have_content "#{new_friend.name} has  declined your friend request."
       end
     end
@@ -48,7 +48,7 @@ RSpec.describe "UserRequestFriends", type: :request do
 
       log_in user
 
-      within ('.notifications') do
+      within ('.nav') do
         expect(page).to have_content "#{new_friend.name} has accepted your friend request."
       end
     end

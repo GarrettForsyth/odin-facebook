@@ -82,5 +82,10 @@ describe User, type: :model do
     expect(user.valid?).to eq(false)
   end
 
+  it "has a default profile" do
+    user.save
+    expect(user.profile).not_to be_nil 
+  end
+
 end
 

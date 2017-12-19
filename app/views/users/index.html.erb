@@ -2,12 +2,26 @@
 
 <div id="users">
 <% for user in @users %>
-  <div class="user">
-    <p>
-      <strong><%= user.name %></strong>
-      <%= link_to "Add Friend", friend_requests_path(friend_id: user) %>
-      <div class="clear"></div>
-    </p>
-  </div>
+  <p>
+    <%= gravatar_for user, size: 50 %>
+    <strong><%= link_to user.name, user %></strong>
+
+    <% if user == current_user %>
+      This is you!
+    <% elsif current_user.pending_friends.include?(user) %>
+      Friend Request Sent
+    <% elsif user.pending_friends.include?(current_user) %>
+      <%= link_to "#{user.name} wants to be friends!",
+        friend_requests_path(friend_id: user.id) %>
+
+    <% elsif !current_user.friends.include?(user) %>
+      <%= link_to "Send Friend Request",
+        friend_requests_path(friend_id: user.id),
+        method: :post %>
+    <% else %>
+      Already Friends!
+    <% end %>
+    <div class="clear"></div>
+  </p>
 <% end %>
 </div>

@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  before_create :build_default_profile
+
   acts_as_voter
 
   has_many :friend_requests, dependent: :destroy
@@ -12,6 +14,8 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   has_many :posts, foreign_key: "author_id", dependent: :destroy
+
+  has_one :profile
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
@@ -32,6 +36,23 @@ class User < ApplicationRecord
   def time_line
     Post.where("author_id IN (?) OR author_id = ? ", self.friends.to_a, id).
          order('created_at DESC')
+  end
+
+  def new_notifications?
+    notifications.where(read: false).any?
+  end
+
+  def get_new_notifications
+    notifications.where(read: false).order(created_at: :desc)
+  end
+
+private
+
+  def build_default_profile
+    build_profile( address: "123 FakeStreet",
+                   phone: "(XXX)-555-5555",
+                   about_me: "Tell about yourself!");
+    true
   end
 
 end

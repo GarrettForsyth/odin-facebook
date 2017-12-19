@@ -9,10 +9,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      flash[:succes] = "Comment created!"
+      Notification.create(user_id: @comment.post.author_id,
+                          notified_by_id: @comment.author_id,
+                          post_id: @comment.post_id,
+                          notice_type: "comment on post")
+      flash[:success] = "Comment created!"
       redirect_to posts_path
     else
-      flash[:error] = "Invalid parameters."
+      flash.now[:error] = "Invalid parameters."
       render 'new'
     end
   end
@@ -62,7 +66,7 @@ private
   end
 
   def comment_params
-    params.require(:comment).permit(:comment_id, :author_id, :content)
+    params.require(:comment).permit(:post_id, :author_id, :content)
   end
 
 end

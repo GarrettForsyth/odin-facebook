@@ -1,0 +1,25 @@
+<% title "Edit Profile of #{current_user.name}" %>
+
+
+<div class="gravatar_edit">
+  <a href="http://gravatar.com/emails" target="_blank">change</a>
+  <br />
+  <%= gravatar_for current_user %>
+</div>
+
+<%= form_for @profile do |f| %>
+  <%= f.label :address %>
+  <%= f.text_field :address, class: 'form-control' %>
+  <br />
+  <%= f.label :phone %>
+  <%= f.text_field :phone, class: "form-control" %>
+  <br />
+  <%= f.label :about_me %>
+  <%= f.text_area :about_me, class: "form-control" %>
+  <br />
+  <%= f.submit "Update Profile", class: "btn btn-primary" %>
+
+
+
+
+<% end %>

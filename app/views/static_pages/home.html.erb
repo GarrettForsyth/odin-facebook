@@ -1,10 +1,19 @@
-<% title "Welcome to Chess Friends!" %>
+<% title "Welcome" %>
 
-<% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-<% else  %>
-  <ul>
-    <li><%= link_to "Sign In", new_user_session_path %></li>
-    <li><%= link_to "Sign Up", new_user_registration_path  %></li>
-  </ul>
-<% end %>
+  <div class="center jumbotron" id="main">
+    <h3>Welcome to the Odin-Facebook App</h2>
+    <h2>
+      This app was created following specifications from the
+      <%= link_to "The Odin Project", "https://www.theodinproject.com/home"  %>
+      which can be found
+      <%= link_to "here", "https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project" %>.
+    </h3>
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-lg btn-primary" %></li>
+    <%= link_to "Sign Up",
+      new_user_registration_path,
+      class: "btn btn-lg btn-primary",
+      id: "sign_up_link" %></li>
+  </div>
+
+  <%= image_tag("odin-facebook-logo.png", alt: "odin-facebook-logo", size: "200x150") %>
+

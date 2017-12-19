@@ -1,0 +1,32 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+ <div class="container">
+   <%= link_to "Odin Facebook | #{yield :title}", root_path, id: "logo" %>
+   <nav>
+     <ul class="nav navbar-nav navbar-right">
+       <% if user_signed_in? %>
+
+         <%= render 'layouts/notifications' if current_user.new_notifications? %>
+         <li><%= link_to "My Profile", profile_path %></li>
+         <li> <%= link_to "Find Friends", users_path  %></li>
+         <li class="dropdown">
+           <a href="#" class=="dropdown-toggle" data-toggle="dropdown">
+             Account <b class="caret"></b>
+           </a>
+           <ul class="dropdown-menu">
+             <li><%= link_to "My Timeline", posts_path %></li>
+             <li><%= link_to "View Friend Requests", friend_requests_path(friend_id: @user) %></li>
+             <li><%= link_to "View Notifications", notifications_path(@user) %></li>
+             <li><%= link_to "Create New Post", new_post_path %></li>
+             <li class="divider"></li>
+             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+           </ul>
+         </li>
+         <% else %>
+
+           <li> <%= link_to "Home", root_path %></li>
+           <li> <%= link_to "Sign In" , new_user_session_path  %></li>
+       <% end %>
+     </ul>
+   </nav>
+ </div>
+</header>

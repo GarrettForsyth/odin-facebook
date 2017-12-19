@@ -9,7 +9,7 @@ class FriendsController < ApplicationController
   def destroy
     current_user.remove_friend(@friend)
     flash[:notice] = "Friend removed."
-    head :no_content
+    redirect_back fallback_location: profile_path
   end
 
 private

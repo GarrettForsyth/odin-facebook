@@ -8,7 +8,7 @@ class FriendRequestsController < ApplicationController
     if @friend_request.save
       create_notification(friend.id, "friend request")
       flash[:notice] = "Friend request sent!"
-      redirect_to root_path
+      redirect_back(fallback_location: profile_path)
     else
       flash[:error] = "Unable to send request."
       render json: @friend_request.errors, status: :unprocessable_entity
@@ -23,15 +23,14 @@ class FriendRequestsController < ApplicationController
   def destroy
     @friend_request.destroy
     create_notification(@friend_request.user_id, "declined friend request")
-    flash[:notice] = "Friend request removed."
-    head :no_content
+    redirect_back(fallback_location: friend_requests_path)
   end
 
   def update
     @friend_request.accept
     create_notification(@friend_request.user_id, "accepted friend request")
+    redirect_back(fallback_location: friend_requests_path)
     flash[:notice] = "Friend request accepted."
-    head :no_content
   end
 
 private

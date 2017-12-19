@@ -9,7 +9,7 @@ describe "DeletingFriends", type: :request do
       create_friendship(@user, @friend)
       @friendship = Friendship.find_by(user: @user, friend: @friend)
       log_in @user
-      within('.friends') do
+      within('.my_friends') do
         click_link "remove"
       end
       log_out @user

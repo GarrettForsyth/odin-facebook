@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211183822) do
+ActiveRecord::Schema.define(version: 20171216195155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,9 @@ ActiveRecord::Schema.define(version: 20171211183822) do
     t.boolean  "read",           default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "post_id"
     t.index ["notified_by_id"], name: "index_notifications_on_notified_by_id", using: :btree
+    t.index ["post_id"], name: "index_notifications_on_post_id", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
@@ -61,6 +63,16 @@ ActiveRecord::Schema.define(version: 20171211183822) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_posts_on_author_id", using: :btree
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "address"
+    t.string   "phone"
+    t.text     "about_me"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,6 +114,7 @@ ActiveRecord::Schema.define(version: 20171211183822) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "notifications", "posts"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "notified_by_id"
   add_foreign_key "posts", "users", column: "author_id"
