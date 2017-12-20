@@ -3,6 +3,8 @@
 <h1> Friend Requests For <%= current_user.name %></h1>
 
 <h3>Outgoing Requests:</h3>
+
+<%= will_paginate @outgoing, param_name: 'outgoing_page' %>
 <ul>
   <% @outgoing.each do |fr| %>
     <li>
@@ -11,8 +13,12 @@
     </li>
   <% end %>
 </ul>
+
+<%= will_paginate @outgoing, param_name: 'outgoing_page' %>
 <br />
 <h3>Incoming Requests</h3>
+
+<%= will_paginate @incoming, param_name: 'incoming_page' %>
 <ul>
   <% @incoming.each do |fr| %>
     <li>
@@ -21,3 +27,5 @@
    </li>
   <% end %>
 </ul>
+
+<%= will_paginate @incoming, param_name: 'incoming_page' %>

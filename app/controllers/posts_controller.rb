@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @time_line = current_user.time_line
+    @posts = current_user.time_line.paginate(page: params[:page])
   end
 
   def like

@@ -27,16 +27,27 @@
   </p>
 </div>
 
+<%= will_paginate @friends, param_name: 'friends_page' %>
 <div class="my_friends">
   <h2>My Friends</h2>
-  <% @profile.user.friends.each do |f| %>
-    <%= gravatar_for f, size: 40 %>
-    <%= link_to f.name, f %>
-    (<%= link_to "remove", friends_destroy_path(id: f.id), method: :delete %>)
-  <% end %>
+  <ul>
+    <% @friends.each do |f| %>
+
+      <li>
+        <%= gravatar_for f, size: 40 %>
+        <%= link_to f.name, f %>
+        (<%= link_to "remove",
+         friends_destroy_path(id: f.id),
+         method: :delete %>)
+      </li>
+
+    <% end %>
+ </ul>
 </div>
+
+<%= will_paginate @friends, param_name: 'friends_page' %>
 
 <div class="my_posts">
   <h2>My Posts</h2>
-    <%= render @profile.user.posts %>
+    <%= render @profile.user.posts.take(10) %>
 </div>

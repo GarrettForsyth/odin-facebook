@@ -1,5 +1,7 @@
 <% title 'User List' %>
 
+<%= will_paginate %>
+
 <div id="users">
 <% for user in @users %>
   <p>
@@ -25,3 +27,6 @@
   </p>
 <% end %>
 </div>
+
+
+<%= will_paginate %>

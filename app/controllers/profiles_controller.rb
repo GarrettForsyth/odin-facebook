@@ -4,6 +4,9 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find_by(user_id: current_user.id)
+    @friends = @profile.user.friends.
+      paginate(page: params[:friends_page],
+               per_page: 10)
   end
 
   def edit

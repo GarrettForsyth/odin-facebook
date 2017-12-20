@@ -16,8 +16,10 @@ class FriendRequestsController < ApplicationController
   end
 
   def index
-    @incoming = FriendRequest.where(friend: current_user)
-    @outgoing = current_user.friend_requests
+    @incoming = FriendRequest.where(friend: current_user).
+      paginate(page: params[:incoming_page])
+    @outgoing = current_user.friend_requests.
+      paginate(page: params[:outgoing_page])
   end
 
   def destroy

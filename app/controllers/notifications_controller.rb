@@ -6,12 +6,12 @@ class NotificationsController < ApplicationController
   end
 
   def index
-    @user_notifications = Notification.where(
+    @notifications = Notification.where(
       user_id: current_user.id).
       order(created_at: :desc)
-    @user_notifications.each do |n|
+    @notifications.each do |n|
       n.update_attributes(read: :true)
     end
+    @notifications = @notifications.paginate(page: params[:page])
   end
-
 end

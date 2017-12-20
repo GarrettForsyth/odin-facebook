@@ -27,15 +27,21 @@
   </p>
 </div>
 
+<%= will_paginate @friends, param_name: 'friends_page'  %>
 <div class="friends">
   <h2> <%= "#{@user.name}\'s Friends"%></h2>
-  <% @user.friends.each do |f| %>
-    <%= gravatar_for f, size: 40 %>
-    <%= link_to f.name, f %>
-  <% end %>
+  <ul>
+    <% @friends.each do |f| %>
+      <li>
+      <%= gravatar_for f, size: 40 %>
+      <%= link_to f.name, f %>
+      </li>
+    <% end %>
+  </ul>
 </div>
+<%= will_paginate @friends, param_name: 'friends_page'  %>
 
 <div class="my_posts">
-  <h2> <%= "#{@user.name}\'s Posts"%></h2>
-    <%= render @user.posts %>
+  <h2> <%= "#{@user.name}\'s Latest  Posts"%></h2>
+    <%= render @user.posts.take(10) %>
 </div>

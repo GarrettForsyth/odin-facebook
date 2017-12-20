@@ -2,7 +2,9 @@
 
 <h2>Notifications:</h2>
 
-<% @user_notifications.each do |n| %>
+<%= will_paginate %>
+
+<% @notifications.each do |n| %>
   <li>
     <%= gravatar_for n.notified_by, size: 30 %>
     <%= render n %>
@@ -10,3 +12,5 @@
     ~><%= link_to "Dismiss", notification_path(n), method: :delete %>
   </li>
 <% end %>
+
+<%= will_paginate %>

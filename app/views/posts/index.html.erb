@@ -1,7 +1,12 @@
 <% title "My Timeline" %>
 
-<% @time_line.each do |p|%> <li>
-    <%= render p %>
+<%= will_paginate %>
+
+<% @posts.each do |p|%>
+  <li>
+    <%= render p, local: @post_comments %>
   </li>
 <% end %>
 
+
+<%= will_paginate %>
