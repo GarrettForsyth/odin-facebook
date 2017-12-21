@@ -73,4 +73,8 @@ class User < ApplicationRecord
     true
   end
 
+  def after_confirmation
+    UserMailer.welcome_email(self).deliver
+  end
+
 end
