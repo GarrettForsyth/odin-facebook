@@ -85,7 +85,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Configure sendgrid
-  config.action_mailer.raise_deliver_errors = false
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'https://aqueous-plains-68780.herokuapp.com' }
 
