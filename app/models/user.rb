@@ -23,7 +23,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, :omniauthable, omniauth_providers: %i[facebook]
 
   validates :name, presence: true, length: { maximum: 256 }
   validates :email, length: { maximum: 256 },
@@ -46,7 +46,25 @@ class User < ApplicationRecord
     notifications.where(read: false).order(created_at: :desc)
   end
 
-private
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      # user.image = auth.info.image
+      # If you are using confirmable and the provider(s) you use validate emails, 
+      # uncomment the line below to skip the confirmation emails.
+       user.skip_confirmation!
+     end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
 
   def build_default_profile
     build_profile( address: "123 FakeStreet",
