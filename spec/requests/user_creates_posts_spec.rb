@@ -16,7 +16,7 @@ describe "UserCreatesPosts", type: :request do
     click_button "Post!"
 
     
-    expect(current_path).to eq(user_profile_path(user))
+    expect(current_path).to eq(posts_path)
 
     expect(Post.last.content).to eq("My first post!")
     expect(Post.last.author_id).to eq(user.id)

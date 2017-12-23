@@ -21,6 +21,10 @@
       <p><%= post.content %></p>
     </div>
 
+    <div class="post_picture">
+      <%= image_tag post.picture.url if post.picture? %>
+    </div>
+
     <div class="post_buttons">
       <% unless post.author_id == current_user.id %>
         
@@ -52,11 +56,19 @@
               class: "btn btn-info",
            method: :get,
            params: { post_id: post.id }%>
+
+      <% if current_user == post.author %>
+        <%= button_to "Delete", post, method: :delete,
+                      class: "btn btn-danger",
+                      data: { confirm: "Really delete this post?" } %>
+      <% end %>
     </div>
+
   </div>
 
   <div id="post-comments-<%= post.id %>" class="post_comments">
     <%= render post.comments %>
   </div>
+
 
 </div>

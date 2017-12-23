@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   before_action :correct_user, only: :destroy
   before_action :vote_params, only: [:like, :dislike, :unlike, :undislike]
+  before_action :destroy_notifications, only: [:destroy]
 
   def new
     @post = Post.new
@@ -15,8 +16,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "Post created!"
-      redirect_to current_user
+      redirect_to posts_path
     else
+      flash[:error] = @post.errors.full_messages.to_sentence
       render 'new'
     end
   end
@@ -24,6 +26,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:success] = "Post deleted."
+    redirect_back fallback_location: profile_path
   end
 
   def index
@@ -70,10 +73,14 @@ private
   end
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :picture)
   end
 
   def vote_params
     params.require(:vote).permit(:post_id, :user_id)
+  end
+
+  def destroy_notifications
+    Notification.delete_all("post_id = #{@post.id}")
   end
 end
