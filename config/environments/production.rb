@@ -107,7 +107,8 @@ Rails.application.configure do
       :aws_access_key_id     => ENV['S3_ACCESS_KEY'],
       :aws_secret_access_key => ENV['S3_SECRET_KEY']
     },
-    fog_directory: ENV['S3_BUCKET']
+    fog_directory: ENV['S3_BUCKET'],
+    s3_region: ENV['S3_REGION']
   }
 
 end
