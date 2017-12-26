@@ -1,7 +1,12 @@
 <% title "#{@user.name}" %>
 
+<% if @user.avatar.exists? %>
+  <%= image_tag @user.avatar.url(:medium) %>
+<% else %>
+    <%= gravatar_for @user, size: 180 %>
+<% end %>
+
 <div class="name">
-  <%= gravatar_for @user, size: 180 %>
   <h3> <%= @user.name %></h3>
 </div>
 
@@ -33,7 +38,7 @@
   <ul>
     <% @friends.each do |f| %>
       <li>
-      <%= gravatar_for f, size: 40 %>
+      <%= thumb_for f, size: 40 %>
       <%= link_to f.name, f %>
       </li>
     <% end %>
@@ -43,5 +48,5 @@
 
 <div class="my_posts">
   <h2> <%= "#{@user.name}\'s Latest  Posts"%></h2>
-    <%= render @user.posts.take(10) %>
+    <%= render @user.posts.order(created_at: :desc).take(10) %>
 </div>

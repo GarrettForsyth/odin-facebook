@@ -1,7 +1,7 @@
 <div class="user_comment" id=<%="user_comment-#{comment.id}"%>->
   
   <div class="comment_header">
-    <%=gravatar_for User.find(comment.author_id), size:30 %>
+    <%= thumb_for User.find(comment.author_id), size:30 %>
     <strong>
       <%= link_to User.find(comment.author_id).name,
                   user_profile_path(comment.author_id) %>

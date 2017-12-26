@@ -19,14 +19,26 @@ Rails.application.routes.draw do
   post '/undislike_comment', to: 'comments#undislike'
 
 
+
   root to: 'static_pages#home'
   get '/about', to: 'static_pages#about'
   get '/contact', to: 'static_pages#contact'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-
   resources :users, only: [:show, :index]
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_avatar'
+    end
+  end
+  resource :user, only: [:delete] do
+    collection do
+      delete 'delete_avatar'
+    end
+  end
+
+
   get 'users/:id', to: 'users#show', as: 'user_profile'
   resource :profile
 

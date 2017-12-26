@@ -1,11 +1,29 @@
 <% title "Edit Profile of #{current_user.name}" %>
 
 
-<div class="gravatar_edit">
-  <a href="http://gravatar.com/emails" target="_blank">change</a>
-  <br />
-  <%= gravatar_for current_user %>
+<% if @profile.user.avatar.exists? %>
+  <%= image_tag @profile.user.avatar.url(:medium) %><br/>
+  <%= button_to "Remove Photo and Use Gravatar",
+    { controller: "users", action: "delete_avatar" },
+    method: :delete %>
+<% else %>
+  <%= gravatar_for @profile.user, size: 180 %>
+<% end %>
+
+<div class="avatar_edit">
+  <%= form_for @profile.user,
+    html: { multipath: true },
+    url: { controller: "users", action: "update_avatar" } do |f| %>
+    <%= f.file_field :avatar, required: 'required' %>
+    <%= f.submit "Update Avatar!" %>
+  <% end %>
 </div>
+
+<div class="gravatar_edit">
+  <a href="http://gravatar.com/emails" target="_blank">Change Gravatar</a>
+  <br />
+</div>
+
 
 <%= form_for @profile do |f| %>
   <%= f.label :address %>

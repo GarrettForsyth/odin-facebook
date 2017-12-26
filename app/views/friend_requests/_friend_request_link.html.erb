@@ -6,7 +6,7 @@
     <%= link_to "#{@user.name} wants to be friends!",
       friend_requests_path(friend_id: @user.id) %>
 
-  <% elsif !current_user.friends.include?(@user) %>
+  <% elsif !current_user.friends.include?(@user) && current_user!= @user%>
     <%= link_to "Send Friend Request",
       friend_requests_path(friend_id: @user.id),method: :post %>
 

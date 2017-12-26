@@ -3,7 +3,7 @@
   <div class="user_post" id=<%="user_post_with_comments_#{post.id}"%> >
   
     <div class="user_post_header">
-      <%=gravatar_for User.find(post.author_id), size: 60 %>
+      <%= thumb_for User.find(post.author_id), size: 60 %>
       <strong>
         <%= link_to User.find(post.author_id).name,
                     user_profile_path(post.author_id) %>
@@ -55,7 +55,7 @@
       <%= button_to "Comment", new_comment_path,
               class: "btn btn-info",
            method: :get,
-           params: { post_id: post.id }%>
+           params: { post_id: post.id, url: request.original_url }%>
 
       <% if current_user == post.author %>
         <%= button_to "Delete", post, method: :delete,

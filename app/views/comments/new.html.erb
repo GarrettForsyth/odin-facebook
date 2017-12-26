@@ -1,6 +1,9 @@
 <% title "New Comment" %>
 
 <%= form_for @comment do |f| %>
+  <% if params[:url].present? %>
+    <%= hidden_field_tag :url, params[:url] %>
+  <% end %>
   <%= f.hidden_field :post_id, value: params[:post_id] %>
   <%= f.hidden_field :author_id, value: current_user.id %>
   <%= f.label :content %>

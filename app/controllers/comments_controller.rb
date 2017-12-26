@@ -14,7 +14,12 @@ class CommentsController < ApplicationController
                           post_id: @comment.post_id,
                           notice_type: "comment on post")
       flash[:success] = "Comment created!"
-      redirect_to posts_path
+      if params[:url].present?
+        redirection = params[:url].to_s
+        redirect_to redirection
+      else
+        redirect_back fallback_location: posts_path
+      end
     else
       flash.now[:error] = "Invalid parameters."
       render 'new'

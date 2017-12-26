@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 
   acts_as_votable
   mount_uploader :picture, PictureUploader
+
   belongs_to :author, class_name: 'User'
   has_many :comments, dependent: :destroy
 

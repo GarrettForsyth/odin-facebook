@@ -16,4 +16,12 @@ module ApplicationHelper
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
 
+  def thumb_for(user, options = { size: 100 })
+    if user.avatar.exists? 
+      image_tag user.avatar.url(:thumb)
+    else
+      gravatar_for(user, options)
+    end
+  end
+
 end
