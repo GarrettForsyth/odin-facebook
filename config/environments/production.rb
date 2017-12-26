@@ -110,6 +110,7 @@ Rails.application.configure do
 
     },
     fog_directory: ENV['S3_BUCKET'],
+    path: 'user_avatar/:attachment/:id/:style/:filename'
   }
 
 end
