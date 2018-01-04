@@ -1,24 +1,25 @@
-# README
+# Odin-Facebook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+See the results [here](https://aqueous-plains-68780.herokuapp.com).
 
-Things you may want to cover:
+This app aims to emulate some of the fundamental features of Facebook.
 
-* Ruby version
+It is the [final project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project) for the [Ruby on Rails component](https://www.theodinproject.com/courses/ruby-on-rails) of the [Odin Project](https://www.theodinproject.com/).
 
-* System dependencies
+Some features this app includes:
 
-* Configuration
+- User account activation and confirmation through email
+- Password reset through email
+- User sessions and a 'remember me' option
+- Friend requests
+- Notifications when a user receives a friend request or when the user's post is commented on
+- A user can create posts. Post may contain uploaded images
+- A user can comment on friend's posts
+- Posts and comments can be liked or disliked
+- Users get a timeline page which displays the latest post of that user and their friends
+- Users get a profile page that displays either their gravatar image, or uploaded image of their choosing, along with their profile information (contact info and an about me section) and their friends
+- Long lists are paginated
+- Allows sign in through Omniauth
+- Sends a welcome email
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+In the future, I wish to improve this project by enhancing the styling and adding javascript.
