@@ -13,8 +13,8 @@ class Post < ApplicationRecord
 private
 
   def picture_size
-    if picture.size > 5.megabytes
-      errors.add(:picture, "should be less than 5MB.")
+    if picture.size > 15.megabytes
+      errors.add(:picture, "should be less than 15MB.")
     end
   end
 
