@@ -12,7 +12,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'omniauth-facebook'
 gem 'carrierwave',    '~> 1.0'
 gem 'mini_magick',    '4.7.0'
-gem 'fog-aws',        '2.0.0'
+gem 'fog',            '1.40.0'
 gem 'nokogiri',       '1.8.1'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
  
