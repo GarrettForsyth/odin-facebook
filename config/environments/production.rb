@@ -109,8 +109,7 @@ Rails.application.configure do
       :region                => ENV['S3_REGION']
 
     },
-    fog_directory: ENV['S3_BUCKET'],
-    path: 'user_avatar/:attachment/:id/:style/:filename'
+    fog_directory: ENV['S3_BUCKET']
   }
 
 end

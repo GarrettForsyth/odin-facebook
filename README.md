@@ -16,8 +16,8 @@ Some features this app includes:
 - A user can create posts. Post may contain uploaded images
 - A user can comment on friend's posts
 - Posts and comments can be liked or disliked
-- Users get a timeline page which displays the latest post of that user and their friends
-- Users get a profile page that displays either their gravatar image, or uploaded image of their choosing, along with their profile information (contact info and an about me section) and their friends
+- Users get a timeline page which displays the latest posts of that user and their friends
+- Users get a profile page that displays either their gravatar image, or an uploaded image of their choosing, along with their profile information (contact info and an about me section) and their friends
 - Long lists are paginated
 - Allows sign in through Omniauth
 - Sends a welcome email
